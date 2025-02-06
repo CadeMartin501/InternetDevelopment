@@ -7,12 +7,15 @@ h1,h2,h3,h4,h5,h6 {
 
 h1 {
     font-size: 22px;
+    font-weight: bold;
+    text-align: center;
 }
 
 
 body {
     font-size: 11px;
     background-color: white;
+    color: #404040;
 }
 
 div p {
@@ -22,4 +25,17 @@ div p {
 
 p {
     margin: 0px;
+}
+
+a {
+    color: #A4A400;
+}
+
+.hide {
+    display:none;
+}
+
+.clarify:hover + .hide {
+    display: block;
+    color: green;
 }
