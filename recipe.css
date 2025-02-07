@@ -19,7 +19,6 @@ body {
 }
 
 div p {
-    background-color: #FFFFA8;
     margin: 1em;
 }
 
@@ -34,4 +33,8 @@ a {
 .clarify:hover + .hide {
     display: block;
     color: green;
+}
+
+blockquote {
+    background-color: #FFFFA8;
 }
