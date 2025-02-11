@@ -1,0 +1,57 @@
+body {
+    margin: 0px;
+}
+
+#inner {
+    background-color: salmon;
+
+    width: 200px;
+    height: 200px;
+
+    border: 50px solid pink;
+    
+}
+
+#outer {
+    background-color: teal;
+    margin: auto;
+    padding: 50px;
+    width: 300px;
+}
+
+header {
+    background-color: paleturquoise;
+    padding-bottom: 1em;
+}
+
+menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+menu > li {
+    background-color: teal;
+    color: white;
+    font-size: 1.5em;
+    padding: 5px 20px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 20px
+}
+
+nav {
+    width: 20%;
+    padding: 1em;
+    border-color: teal;
+    border-width: 2px;
+}
+
+article {
+    width: 80%;
+    padding: 1em;
+}
+
+main {
+    display: flex;
+}
