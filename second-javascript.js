@@ -1,18 +1,21 @@
+(function () {
+    "use strict";
+    let x = 42;
+
+    window.addEventListener('load', init);
+
+
 function init() {
     let myButton = document.getElementById('my-button');
-    alert(myButton);
+    // alert(myButton);
     myButton.addEventListener('click', buttonClick);
 }
 
-window.addEventListener('load', init);
-
-
-
-
-
-
-
 
 function buttonClick() {
-    alert('The button was clicked.');
+    // alert('The button was clicked.');
+    let card = document.getElementById('card');
+    card.src = "kenney_boardgame-pack/PNG/Cards/cardSpadesA.png";
 }
+}
+)
