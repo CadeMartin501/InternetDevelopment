@@ -1,6 +1,19 @@
-h1 {
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* 
+    Name: Cade Martin
+    Date: February 25, 2025
+    This is the style.css page for my portfolio of web development work.
+    It is used by both my index and CreativeProject1.html pages to style
+
+*/
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Atkinson Hyperlegible Mono', 'Times New Roman', serif;
     background-color: rgb(202,220,192);
-    display: inline-block;
+display: block;
+}
+
+h1 {
     font-size: 3em;
     text-align: center;
     text-decoration: underline;
@@ -8,11 +21,23 @@ h1 {
 }
 
 h2 {
-    background-color: lightgrey;
     font-size: 2.5em;
     margin: 0;
 }
 
 hr {
     margin: 0.5em 0em;
+}
+
+a {
+    font-family: 'Atkinson Hyperlegible Mono', 'Times New Roman', serif;
+    display: block;
+}
+
+h2.section {
+font-style: italic;
+}
+
+li {
+    margin: 0.5em;
 }
