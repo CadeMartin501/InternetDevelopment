@@ -1,0 +1,46 @@
+h1 {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+#s {
+    background-color: sienna;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#l {
+    background-color: peru;
+    height: 110px;
+    width: 110px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#t {
+    height: 25px;
+}
+
+#o, #h {
+    height: 20px;
+}
+
+span {
+    width: 20px;
+    border-radius: 50%;
+}
+
+#o, #t, #h {
+    background-color: black;
+}
+
+#s, #l, #o, #t, #h {
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+}
