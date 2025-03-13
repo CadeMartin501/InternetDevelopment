@@ -7,7 +7,7 @@
 (function() {
   'use strict';
   window.addEventListener('load', init);
-
+  
   /**
    * TODO
    * Set up event listeners for the bugs.
@@ -25,9 +25,13 @@
    */
   function whackBug(event) {
     let clicked = event.currentTarget;
-    let scoreIncrease = document.getElementById('score');
+    let score = document.getElementById('score');
     if (!clicked.classList.contains('whacked')) {
-      scoreIncrease.textContent = parseInt(scoreIncrease.textContent) + 1;
+      score.textContent = parseInt(score.textContent) + 1;
+    }
+    if (parseInt(score.textContent)==qsa('#bug-container > img').length) {
+      let text = document.getElementById('text');
+      text.textContent = "Game Over!"
     }
         clicked.classList.add('whacked');
         clicked.src="bug-whacked.png";
