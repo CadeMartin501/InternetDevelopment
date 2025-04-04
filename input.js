@@ -15,9 +15,15 @@
     }
 
     function checkZipCode() {
-        const zipRegex =  /^\d{5}$/;
+        const zipRegex =  /^\d{5}(-\d{4})?$/;
         const zipCode = id('zip-code');
-        console.log(zipRegex.test(zipCode.value));
+        if(zipRegex.test(zipCode.value)){
+            zipCode.classList.add('match');
+            zipCode.classList.remove('nomatch');
+        } else {
+            zipCode.classList.add('nomatch');
+            zipCode.classList.remove('match');
+        }
     }
 
     /////////////////////////////////////////////////////////////////////
