@@ -33,7 +33,6 @@
         const minTemps = response.daily.temperature_2m_min;
         const maxTemps = response.daily.temperature_2m_max;
         const weatherCodes = response.daily.weather_code;
-        console.log(response);
         for (let i=0; i<dates.length; i++) {
             const newLI = document.createElement('li');
             newLI.textContent = `${dates[i]}: ${Math.round(maxTemps[i])}/${Math.round(minTemps[i])} ${codeMap.get(weatherCodes[i])}`;
