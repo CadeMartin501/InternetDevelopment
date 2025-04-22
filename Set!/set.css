@@ -40,3 +40,48 @@ h2 {
   border: 5pt solid black;
   color: white;
 }
+
+#details-bar {
+  background-color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 0.5em;
+  color: white;
+  font-size: 14pt;
+}
+
+.card {
+  width: 220px;
+  height: 95px;
+  border: 0.35em;
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+p > .card {
+  font-weight: bold;
+  font-size: 16pt;
+  text-align: center;
+}
+
+.hide-imgs > .card {
+  display: none;
+}
+
+.selected {
+  box-shadow: 6px 6px #636363;
+}
+
+#board {
+  border-left: 5pt;
+  border-right: 5pt;
+  border-bottom: 5pt;
+  justify-content: space-evenly;
+  padding: 20px;
+}
