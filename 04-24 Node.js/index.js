@@ -29,10 +29,10 @@ app.get('/math/:number', (req,res) => {
     }
 })
 
-app.get('/power/:base/:power', (req, res) => {
+app.get('/power/:base/:exponent', (req, res) => {
     const base = parseInt(req.params.base);
-    const power = parseInt(req.params.power);
-    res.send(base**power);
+    const exponent = parseInt(req.params.exponent);
+    res.send(`${base}^${exponent} = ${base**exponent}`);
 })
 
 app.listen(port, () => {
