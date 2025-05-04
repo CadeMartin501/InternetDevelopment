@@ -4,6 +4,7 @@
     let timerId;
     let remainingSeconds;
     let setCount = 0;
+    let currentlySelected = 0;
 
     window.addEventListener('load', init);
 
@@ -12,11 +13,12 @@
       startButton.addEventListener('click', toggleView);
       let backButton = id('back-btn');
       backButton.addEventListener('click', toggleView);
+      let refreshBtn = id('refresh-btn')
+      refreshBtn.addEventListener('click', refreshBoard);
     }
 
     function toggleView() {
       startTimer();
-      console.log(remainingSeconds);
       let menu = id('menu-view');
       menu.classList.toggle('hidden');
       let game = id('game-view');
@@ -77,37 +79,119 @@
 
 //Return a div element with COUNT number of img elements appended as children
   function generateUniqueCard(isEasy) {
-    let attributes = generateRandomAttributes(isEasy);
-    let newCard = document.createElement('div');
-    newCard.classList.add(attributes[0]); //Color
-    newCard.classList.add(attributes[1]); //Fill
-    newCard.classList.add(attributes[2]); //Shape
-    newCard.classList.add(attributes[3]); //Count
+    let board = id('board');
+    let existingIds = new Set([...board.children].map(c => c.id));
+    let card, attributes, idStr;
+    do {
+      attributes = generateRandomAttributes(isEasy);
+      idStr = attributes.join('-');
+    } while (existingIds.has(idStr));
+    
+    card = document.createElement('div');
+    card.classList.add(...attributes);
+    card.classList.add('card');
+    card.id = idStr;
 
-    if (isEasy) {
-      newCard.classList.remove(attributes[1]);
-      newCard.classList.add('Solid');
-       }
+    for (let i = 0; i < attributes[3]-1; i++) {
+      let img = document.createElement('img');
+      img.src = `img/${attributes[0]}-${attributes[1]}-${attributes[2]}.png`
+      card.appendChild(img);
+    }
 
-    return newCard;
-    // let cards = qsa('board > div');
+    card.addEventListener('click', cardSelected);
+    return card;
   }
 
 //Starts the timer for a new game. No return value.
   function startTimer() {
-    timerId = qs('select');
-    remainingSeconds= timerId.value;
-    setInterval(advanceTimer, 1000);
+    let select = qs('select');
+    remainingSeconds= parseInt(select.value);
+    updateTimerDisplay();
+    timerId = setInterval(advanceTimer,1000);
   }
 
 //Updates the game timer (module-global and #time shown on page) by 1 second. No return value.
   function advanceTimer() {
     remainingSeconds--;
+    updateTimerDisplay();
+    if (remainingSeconds <= 0) {
+      clearInterval(timerId);
+      endGame();
+    }
   }
 
-//Used when a card is selected, checking how many cards are currently selected. If 3 cards are selected, uses isASet (provided) to handle "correct" and "incorrect" cases. No return value.
+  function updateTimerDisplay() {
+    let timeSpan = id('time');
+    let minutes = Math.floor(remainingSeconds/60).toString();
+    let seconds = (remainingSeconds%60).toString();
+    timeSpan.textContent = `${minutes}:${seconds}`;
+  }
+
+  function endGame() {
+    clearInterval(timerId);
+    qsa('.card').forEach(card => {
+      card.removeEventListener('click', cardSelected);
+      card.classList.remove('selected');
+    });
+    id('refresh-btn').disabled = true;
+  }
+
+
   function cardSelected() {
-    this.classList.add('selected');
+    if (remainingSeconds <= 0) return;
+  
+    // Toggle selection
+    if (!this.classList.contains('selected')) {
+      this.classList.add('selected');
+      currentlySelected++;
+    } else {
+      this.classList.remove('selected');
+      currentlySelected--;
+    }
+  
+    let selected = qsa('.card.selected');
+  
+    // Only evaluate when exactly 3 cards are selected
+    if (selected.length === 3) {
+      let message = document.createElement('p');
+      message.classList.add('temp-message'); // Optional: for styling or removal
+      let board = id('board');
+  
+      if (isASet(selected)) {
+        message.textContent = 'SET!';
+        id('set-count').textContent = setCount;
+  
+        // Remove and replace cards
+        selected.forEach(card => card.remove());
+        for (let i = 0; i < 3; i++) {
+          let isEasy = qs('input[name="diff"]:checked').value === 'easy';
+          let newCard = generateUniqueCard(isEasy);
+          board.appendChild(newCard);
+        }
+      } else {
+        message.textContent = 'Not a Set :(';
+        remainingSeconds = Math.max(0, remainingSeconds - 15);
+      }
+  
+      // Display message directly in the board (or anywhere else you'd like)
+      board.appendChild(message);
+  
+      setTimeout(() => {
+        message.remove();
+        qsa('.card.selected').forEach(card => card.classList.remove('selected'));
+        currentlySelected = 0;
+      }, 1000);
+    }
+  }
+
+  function refreshBoard() {
+    let board = id('board');
+    board.innerHTML = '';
+    for (let i = 0; i< 12; i++) {
+      let isEasy = qs('input[name="diff"]:checked').value === 'easy';
+      let card = generateUniqueCard(isEasy);
+      board.appendChild(card);
+    }
   }
 
     /////////////////////////////////////////////////////////////////////
