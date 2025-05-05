@@ -1,15 +1,44 @@
-const { UVKey } = require("./Key.js");
 
 (function() {
     'use strict';
 
     window.addEventListener('load', init);
 
-    // Import the API key from another file.
-    const key = require('./apikey.js');
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", `${UVKey}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
 
     function init() {
-        console.log(UVKey);
+
+        const url = 'https://api.openuv.io/api/v1/uv?lat=34.54&lng=-93.03&alt=100&dt=';
+        fetch(url,requestOptions)
+        .then(statusCheck)
+        .then((response) => response.json())
+        .then(addUV)
+        .catch(UVError);
+    }
+
+    function addUV(result) {
+        const UVContainer = id('UVContainer');
+        
+        const UVMax = result.result.uv_max;
+        const UVMaxTime = result.result.uv_max_time;
+        const safeTime = result.result.safe_exposure_time.st2;
+        const date = new Date(UVMaxTime);
+        const newPara = document.createElement('p');
+        newPara.textContent = `Today's max UV will be ${Math.round(UVMax)} at ${date.getHours()}:${date.getMinutes()} The recommended time to tan is ${safeTime} minutes`;
+        UVContainer.appendChild(newPara);
+
+    }
+
+    function UVError(error) {
+        console.log(error);
     }
 
     /////////////////////////////////////////////////////////////////////
