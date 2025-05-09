@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+
+body {
+    background-color: #ffb500;
+    font-family: Honk, serif, sans-serif;
+    font-size: xxx-large;
+    background-image: url("C:/Users/crmar/InternetDevelopment/APICreativeProject/Groovy-Sun.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    text-align: justify;
+}

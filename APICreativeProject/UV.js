@@ -32,7 +32,7 @@
         const safeTime = result.result.safe_exposure_time.st2;
         const date = new Date(UVMaxTime);
         const newPara = document.createElement('p');
-        newPara.textContent = `Today's max UV will be ${Math.round(UVMax)} at ${date.getHours()}:${date.getMinutes()} The recommended time to tan is ${safeTime} minutes`;
+        newPara.textContent = `Today's max UV will be ${Math.round(UVMax)} at ${date.getHours()%12}:${date.getMinutes().toString().padStart(2, '0')}${date.getHours()>12 ? 'p.m': 'a.m'}. The recommended time to tan is ${safeTime} minutes`;
         UVContainer.appendChild(newPara);
 
     }
